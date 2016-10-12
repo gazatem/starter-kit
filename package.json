@@ -1,0 +1,58 @@
+{
+  "name": "My Starter Kit",
+  "homepage": "https://github.com/gazatem",
+  "version": "1.0.0",
+  "description": "A frontend starter kit for react projects inspired from https://github.com/cloudmu/react-redux-starter-kit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gazatem"
+  },
+  "keywords": [
+    "react",
+    "reactjs",
+    "redux",
+    "reduxjs",
+    "react-router",
+    "bootstrap",
+    "starter kit",
+    "boilerplate"
+  ],
+  "author": "twitter.com/gazaten (http://www.gazatem.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://www.gazatem.com"
+  },
+
+  "proxy": "http://localhost:3001",
+
+  "devDependencies": {
+    "react-scripts": "0.6.0"
+  },
+
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.4",
+    "classnames": "^2.2.5",
+    "font-awesome": "^4.6.3",
+    "isomorphic-fetch": "^2.2.1",
+    "jquery": "^3.1.1",
+    "jwt-decode": "^2.1.0",
+    "lodash": "^4.16.2",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-addons-shallow-compare": "15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0",
+    "react-virtualized": "^8.0.10",
+    "socket.io-client": "^1.4.8"
+  },
+
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
