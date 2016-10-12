@@ -1,11 +1,11 @@
 {
-  "name": "My Starter Kit",
+  "name": "my-starter-kit",
   "homepage": "https://github.com/gazatem",
   "version": "1.0.0",
-  "description": "A frontend starter kit for react projects inspired from https://github.com/cloudmu/react-redux-starter-kit",
+  "description": "A frontend starter kit for react projects inspired from react-redux-starter-kit",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gazatem"
+    "url": "https://github.com/cloudmu/react-redux-starter-kit.git"
   },
   "keywords": [
     "react",
