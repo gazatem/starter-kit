@@ -1,24 +1,33 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import rootReducer from '../reducers';
+import thunk from 'redux-thunk';
+import routes from '../routes';
+import {reduxReactRouter} from 'redux-router';
+import createHistory from 'history/lib/createBrowserHistory';
+import {applyMiddleware, compose, createStore} from 'redux';
 import createLogger from 'redux-logger';
-import rootReducer from '../reducers/index';
-const logger = createLogger();
 
-const initialState = {};
+export default function configureStore(initialState) {
+    let createStoreWithMiddleware;
 
-export default function configureStore() {
-  let store;
+    const logger = createLogger();
 
-  if (module.hot) {
-    store = createStore(rootReducer, initialState, compose(
-      applyMiddleware(thunkMiddleware, logger),
-      window.devToolsExtension ? window.devToolsExtension() : f => f
-    ));
-  } else {
-    store = createStore(rootReducer, initialState, compose(
-      applyMiddleware(thunkMiddleware), f=>f
-    ));
-  }
+    const middleware = applyMiddleware(thunk, logger);
 
-  return store;
+    createStoreWithMiddleware = compose(
+     middleware,
+     reduxReactRouter({routes, createHistory})
+    );
+
+    const store = createStoreWithMiddleware(createStore)(rootReducer, initialState);
+
+    if (module.hot) {
+        module.hot
+            .accept('../reducers', () => {
+                const nextRootReducer = require('../reducers/index');
+                store.replaceReducer(nextRootReducer);
+            });
+    }
+
+    return store;
+
 }
