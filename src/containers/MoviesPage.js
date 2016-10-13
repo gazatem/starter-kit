@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getGenreMovies } from '../actions/genre';
+import { Pagination } from 'react-bootstrap';
 
 
 class MoviesPage extends Component {
@@ -10,6 +11,10 @@ class MoviesPage extends Component {
     }
 
     listMovies() {
+         if(!this.props.movies){
+           return <div>Loading ...</div>
+        }
+
         return(
                     this.props.movies.map((movie, index) => {
                         return (
@@ -29,17 +34,23 @@ class MoviesPage extends Component {
         let start_count = 0;
     */
         if(!this.props.movies){
-           return "Loading ..."
+           return <div>Loading ...</div>
         }
+        const pagination = this.props.meta["pagination"];
+        const current_page = pagination.current_page;
+        const pages = pagination.total_pages;
+
+        console.log("Current Page", current_page);
+
         return (
           <div>
             <div className="container">
                 <h3>Hello Movies!</h3>
                 {this.listMovies()}
 
-                if (this.props.movies.length) {
-                    <div> pagination</div>
-                }
+<Pagination bsClass="pagination" className="users-pagination pull-right" bsSize="medium" maxButtons={10} first last next prev
+                        boundaryLinks items={pages} activePage={current_page} />
+               
             </div>
           </div>
         );
