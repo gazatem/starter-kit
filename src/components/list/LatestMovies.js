@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getLatestMovies } from '../../actions/list';
 import { Pagination } from 'react-bootstrap';
+import MovieBox from './MovieBox';
 
 class LatestMovies extends Component {
    constructor(props)
@@ -12,7 +13,6 @@ class LatestMovies extends Component {
 
     changePage(page)
     {
-        console.log("Page", page);
         this.props.dispatch(getLatestMovies());
     }
 
@@ -28,10 +28,12 @@ class LatestMovies extends Component {
         return(
             this.props.movies.map((movie, index) => {
                 return (
-                    <div key={index}>{movie.title}</div>
+                    <div key={index} className="col-xs-3">
+                    <MovieBox  movie={movie} />
+                    </div>
                 );
-                    })
-            )
+            })
+        )
     }
 
     render() {
@@ -48,13 +50,14 @@ class LatestMovies extends Component {
           <div>
             <div className="container">
                 <h3>Hello Movies!</h3>
-                {this.listMovies()}
+                <div className="row">
+                    {this.listMovies()}
+                </div>
 
                 <Pagination className="pagination" bsSize="medium" maxButtons={10} first last next prev boundaryLinks
                 items={pages}
                 activePage={current_page}
                 onSelect={this.changePage}/>
-
             </div>
           </div>
         );
@@ -62,9 +65,8 @@ class LatestMovies extends Component {
 }
 
 function mapStateToProps(state) {
-    const { data, meta } = state.list.movies;
+    const { data, meta } = state.listing.latest;
     return { movies: data, meta: meta };
 }
 
 export default connect(mapStateToProps)(LatestMovies);
-
