@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GenresMenu from '../components/menu/GenresMenu';
+import LatestMovies from '../components/list/LatestMovies';
 
 export default class HomePage extends Component {
   render() {
@@ -11,7 +12,7 @@ export default class HomePage extends Component {
                     <GenresMenu/>
                 </div>
                 <div className="col-md-9">
-                    <h3>Hello World!</h3>
+                    <LatestMovies/>
                 </div>
             </div>
         </div>
