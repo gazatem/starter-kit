@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import GenresMenu from '../components/menu/GenresMenu';
+import GenreMovies from '../components/list/GenreMovies';
 
-export default class HomePage extends Component {
+export default class GenrePage extends Component {
   render() {
     return (
       <div>
@@ -11,7 +12,7 @@ export default class HomePage extends Component {
                     <GenresMenu/>
                 </div>
                 <div className="col-md-9">
-                    <h3>Hello World!</h3>
+                    <GenreMovies/>
                 </div>
             </div>
         </div>

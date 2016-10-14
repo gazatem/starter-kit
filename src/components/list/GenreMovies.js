@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getGenreMovies } from '../actions/genre';
+import { getGenreMovies } from '../../actions/genre';
 import { Pagination } from 'react-bootstrap';
 
-
-class MoviesPage extends Component {
+class GenreMovies extends Component {
    constructor(props)
     {
         super(props);
@@ -67,4 +66,5 @@ function mapStateToProps(state) {
     return { movies: data, meta: meta };
 }
 
-export default connect(mapStateToProps)(MoviesPage);
+export default connect(mapStateToProps)(GenreMovies);
+

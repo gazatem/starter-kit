@@ -1,11 +1,18 @@
 import axios from 'axios';
-
-export const GENRE_MOVIES = 'GENRE_MOVIES';
+import * as constants from '../constants';
 
 export function getGenreMovies(genre_id = 1, page=1){
-    const request = axios.get(`http://api.sinemateknik.com/v1/genres/${genre_id}/movies?page=${page}`);
+    const request = axios.get(`${constants.API_URL}genres/${genre_id}/movies?page=${page}`);
     return {
-      type: GENRE_MOVIES,
+      type: constants.GENRE_MOVIES,
+      payload: request
+    }
+}
+
+export function getGenresMenu(){
+    const request = axios.get(`http://api.sinemateknik.com/v1/genres`);
+    return {
+      type: constants.GENRES_MENU,
       payload: request
     }
 }

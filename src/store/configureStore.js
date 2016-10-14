@@ -1,33 +1,32 @@
-import rootReducer from '../reducers';
-import thunk from 'redux-thunk';
-import routes from '../routes';
-import {reduxReactRouter} from 'redux-router';
-import createHistory from 'history/lib/createBrowserHistory';
-import {applyMiddleware, compose, createStore} from 'redux';
-import createLogger from 'redux-logger';
+import { compose, createStore, applyMiddleware } from 'redux'
+import thunkMiddleware from 'redux-thunk'
+import createLogger from 'redux-logger'
+import rootReducer from '../reducers'
+import promise from 'redux-promise';
+
+const logger = createLogger({
+  level: 'info',
+  collapsed: false,
+  logger: console,
+  predicate: (getState, action) => true
+})
+
+const createStoreWithMiddleware = compose(applyMiddleware(
+  promise,
+  thunkMiddleware,
+  logger
+),window.devToolsExtension ? window.devToolsExtension() : f => f)(createStore)
 
 export default function configureStore(initialState) {
-    let createStoreWithMiddleware;
+  const store = createStoreWithMiddleware(rootReducer, initialState)
 
-    const logger = createLogger();
+  if (module.hot) {
+    // Enable Webpack hot module replacement for reducers
+    module.hot.accept('../reducers', () => {
+      const nextRootReducer = require('../reducers')
+      store.replaceReducer(nextRootReducer)
+    })
+  }
 
-    const middleware = applyMiddleware(thunk, logger);
-
-    createStoreWithMiddleware = compose(
-     middleware,
-     reduxReactRouter({routes, createHistory})
-    );
-
-    const store = createStoreWithMiddleware(createStore)(rootReducer, initialState);
-
-    if (module.hot) {
-        module.hot
-            .accept('../reducers', () => {
-                const nextRootReducer = require('../reducers/index');
-                store.replaceReducer(nextRootReducer);
-            });
-    }
-
-    return store;
-
+  return store
 }
