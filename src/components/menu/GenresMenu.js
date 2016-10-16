@@ -9,6 +9,7 @@ class GenresMenu extends Component {
         this.props.dispatch(getGenresMenu());
     }
 
+
     listGenres() {
         if(!this.props.genres){
            return "Loading ..."

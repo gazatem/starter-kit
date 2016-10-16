@@ -48,8 +48,8 @@ class LatestMovies extends Component {
 
         return (
           <div>
-            <div className="container">
-                <h3>Hello Movies!</h3>
+
+                <h3>Latest Movies!</h3>
                 <div className="row">
                     {this.listMovies()}
                 </div>
@@ -58,7 +58,6 @@ class LatestMovies extends Component {
                 items={pages}
                 activePage={current_page}
                 onSelect={this.changePage}/>
-            </div>
           </div>
         );
     }

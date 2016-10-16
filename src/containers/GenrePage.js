@@ -3,6 +3,8 @@ import GenresMenu from '../components/menu/GenresMenu';
 import GenreMovies from '../components/list/GenreMovies';
 
 export default class GenrePage extends Component {
+
+
   render() {
     return (
       <div>
@@ -12,7 +14,7 @@ export default class GenrePage extends Component {
                     <GenresMenu/>
                 </div>
                 <div className="col-md-9">
-                    <GenreMovies/>
+                    <GenreMovies genre_id={this.props.params.genre_id}/>
                 </div>
             </div>
         </div>

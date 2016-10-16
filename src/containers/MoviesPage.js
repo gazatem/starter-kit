@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getGenreMovies } from '../actions/genre';
 import { Pagination } from 'react-bootstrap';
-
+import MovieBox from '../components/list/MovieBox';
 
 class MoviesPage extends Component {
    constructor(props)
@@ -29,10 +29,12 @@ class MoviesPage extends Component {
         return(
             this.props.movies.map((movie, index) => {
                 return (
-                    <div key={index}>{movie.title}</div>
+                    <div key={index} className="col-xs-3">
+                        <MovieBox  movie={movie} />
+                    </div>
                 );
-                    })
-            )
+            })
+        )
     }
 
     render() {
@@ -48,8 +50,11 @@ class MoviesPage extends Component {
         return (
           <div>
             <div className="container">
-                <h3>Hello Movies!</h3>
-                {this.listMovies()}
+
+                <h3>All Movies!</h3>
+                <div className="row">
+                    {this.listMovies()}
+                </div>
 
                 <Pagination className="pagination" bsSize="medium" maxButtons={10} first last next prev boundaryLinks
                 items={pages}

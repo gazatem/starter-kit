@@ -1,0 +1,18 @@
+.box{
+    border:1px #eee solid ;
+    padding: 10px 0;
+    margin: 6px;
+    height: 210px;
+}
+
+.movie{
+    text-align: center;
+    font-weight: bold;
+}
+
+.movie img{
+    max-height: 150px;
+    padding: 10px 0;
+    margin: 0 auto;
+}
+

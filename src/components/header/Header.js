@@ -18,23 +18,10 @@ export default class Header extends Component {
                       <Link to={`/` } className="navbar-brand"><strong>Home</strong></Link>
                     </div>
 
-
-                    <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                      <ul className="nav navbar-nav">
-
-
-                      </ul>
-                      <form className="navbar-form navbar-right">
-                        <div className="form-group">
-                          <input type="text" className="form-control" placeholder="Search"/>
-                        </div>
-                        <button type="submit" className="btn btn-default">Submit</button>
-                      </form>
                       <ul className="nav navbar-nav navbar-right">
                         <li><Link to={`/movies` }><strong>Movies</strong></Link></li>
                       </ul>
                     </div>
-                  </div>
                 </nav>
           );
       }
