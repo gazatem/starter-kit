@@ -16,3 +16,4 @@ export function getGenreMovies(genre_id = 1, page=1){
       payload: request
     }
 }
+

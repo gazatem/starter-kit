@@ -4,30 +4,36 @@ import { getGenreMovies } from '../../actions/genre';
 import { Pagination } from 'react-bootstrap';
 import MovieBox from './MovieBox';
 
-
 class GenreMovies extends Component {
-   constructor(props)
+
+    constructor(props)
     {
         super(props);
+        var genre;
         this.changePage = this.changePage.bind(this);
+        this.loadData = this.loadData.bind(this);
     }
 
-    changePage(page)
+    changePage(page = 1)
     {
-        console.log("Page", page);
-        this.props.dispatch(getGenreMovies(this.props.genre_id, page));
+        this.loadData(this.genre, page);
     }
 
-    componentWillMount(){
-        console.log("componentWillMount", this.props.genre_id)
-        this.props.dispatch(getGenreMovies());
+    loadData(gender_id = 1, page = 1)
+    {
+        this.genre = gender_id;
+        this.props.dispatch(getGenreMovies(gender_id, page));
     }
 
-    componentWillUpdate(nextProps, nextState){
-    console.log("Second CHange", this.props.genre_id)
-    return nextProps.genre_id !== this.props.genre_id;
+    componentWillMount() {
+        this.loadData(this.props.genre_id);
     }
 
+    componentWillReceiveProps(nextProps){
+        if (JSON.stringify(this.props.genre_id) !== JSON.stringify(nextProps.genre_id)){
+            this.loadData(nextProps.genre_id);
+        }
+    }
 
     listMovies() {
          if(!this.props.movies){
@@ -46,7 +52,6 @@ class GenreMovies extends Component {
     }
 
     render() {
-
         if(!this.props.movies){
            return <div>Loading ...</div>
         }
@@ -57,8 +62,6 @@ class GenreMovies extends Component {
 
         return (
           <div>
-
-                <h3>Latest Movies!</h3>
                 <div className="row">
                     {this.listMovies()}
                 </div>

@@ -8,6 +8,7 @@ export default function(state = INITIAL_STATE, action){
             return {...state, movies: action.payload.data };
         case constants.GENRES_MENU:
             return {...state, genres: action.payload.data };
+
         default:
           return state;
     }
