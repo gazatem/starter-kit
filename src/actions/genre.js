@@ -17,3 +17,10 @@ export function getGenreMovies(genre_id = 1, page=1){
     }
 }
 
+export function getGenre(genre_id = 1){
+    const request = axios.get(`http://api.sinemateknik.com/v1/genres/${genre_id}`);
+    return {
+      type: constants.GENRE,
+      payload: request
+    }
+}

@@ -5,9 +5,11 @@ import { Link } from 'react-router';
 
 class GenresMenu extends Component {
 
+
     componentWillMount(){
         this.props.dispatch(getGenresMenu());
     }
+
 
     listGenres() {
         if(!this.props.genres){

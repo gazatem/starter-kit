@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getGenreMovies } from '../../actions/genre';
+import { getGenreMovies, getGenre } from '../../actions/genre';
 import { Pagination } from 'react-bootstrap';
 import MovieBox from './MovieBox';
 
@@ -9,7 +9,6 @@ class GenreMovies extends Component {
     constructor(props)
     {
         super(props);
-        var genre;
         this.changePage = this.changePage.bind(this);
         this.loadData = this.loadData.bind(this);
     }
@@ -22,6 +21,7 @@ class GenreMovies extends Component {
     loadData(gender_id = 1, page = 1)
     {
         this.genre = gender_id;
+        this.props.dispatch(getGenre(gender_id));
         this.props.dispatch(getGenreMovies(gender_id, page));
     }
 
@@ -31,6 +31,7 @@ class GenreMovies extends Component {
 
     componentWillReceiveProps(nextProps){
         if (JSON.stringify(this.props.genre_id) !== JSON.stringify(nextProps.genre_id)){
+            console.log("Genre Changed");
             this.loadData(nextProps.genre_id);
         }
     }
@@ -44,7 +45,7 @@ class GenreMovies extends Component {
             this.props.movies.map((movie, index) => {
                 return (
                     <div key={index} className="col-xs-3">
-                    <MovieBox  movie={movie} />
+                        <MovieBox  movie={movie} />
                     </div>
                 );
             })
@@ -55,6 +56,10 @@ class GenreMovies extends Component {
         if(!this.props.movies){
            return <div>Loading ...</div>
         }
+        if(!this.props.genre){
+           return <div>Loading ...</div>
+        }
+
 
         const pagination = this.props.meta["pagination"];
         const current_page = pagination.current_page;
@@ -63,10 +68,11 @@ class GenreMovies extends Component {
         return (
           <div>
                 <div className="row">
+                    <h3>{this.props.genre.name}</h3>
                     {this.listMovies()}
                 </div>
 
-                <Pagination className="pagination" bsSize="medium" maxButtons={10} first last next prev boundaryLinks
+                <Pagination className="pagination" bsSize="medium" maxButtons={12} first last next prev boundaryLinks
                 items={pages}
                 activePage={current_page}
                 onSelect={this.changePage}/>
@@ -77,7 +83,7 @@ class GenreMovies extends Component {
 
 function mapStateToProps(state) {
     const { data, meta } = state.genre.movies;
-    return { movies: data, meta: meta };
+    return { movies: data, meta: meta, genre: state.genre.info.data };
 }
 
 export default connect(mapStateToProps)(GenreMovies);

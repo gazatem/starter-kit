@@ -2,16 +2,16 @@
     border:1px #eee solid ;
     padding: 10px 0;
     margin: 6px;
-    height: 210px;
+    height: 240px;
 }
 
 .movie{
     text-align: center;
-    font-weight: bold;
+
 }
 
 .movie img{
-    max-height: 150px;
+    max-height: 165px;
     padding: 10px 0;
     margin: 0 auto;
 }
