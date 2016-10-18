@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getSingleMovie } from '../../actions/movie';
 import { Row, Col, Image } from 'react-bootstrap';
+import Helmet from 'react-helmet';
 
 class SingleMovie extends Component {
 
@@ -17,6 +18,12 @@ class SingleMovie extends Component {
         const img_url = `http://backoffice.sinemateknik.com/images/movies/${movie.id}${movie.image}`;
         return(
             <div>
+                <Helmet
+                    title={movie.title}
+                    meta={[
+                        {property: 'og:title', content: movie.title},
+                    ]} />
+
                 <Row>
                     <Col xs={2} md={2}>
                         <Image src={img_url} responsive className="responsive-image" />
